@@ -26,13 +26,13 @@ app.use("/api/messages", messageRoutes);
 
 // Serve frontend in production
 if (ENV.NODE_ENV === "production") {
-  const frontendPath = path.join(__dirname, "../frontend/dist");
-  app.use(express.static(frontendPath));
+  const FRONTEND_URL = ENV.CLIENT_URL;
 
   app.get("*", (_, res) => {
-    res.sendFile(path.join(frontendPath, "index.html"));
+    res.redirect(FRONTEND_URL);
   });
 }
+
 
 // Start server after DB connection
 const startServer = async () => {
